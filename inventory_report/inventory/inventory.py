@@ -2,7 +2,7 @@ from inventory_report.reports.simple_report import SimpleReport
 from inventory_report.reports.complete_report import CompleteReport
 import csv
 import json
-import xmltodict
+# import xmltodict
 
 
 class Inventory:
@@ -13,14 +13,14 @@ class Inventory:
                 return list(csv.DictReader(file))
             elif path.endswith(".json"):
                 return json.load(file)
-            elif path.endswith(".xml"):
-                return xmltodict.parse(file.read())["dataset"]["record"]
+            # elif path.endswith(".xml"):
+            #     return xmltodict.parse(file.read())["dataset"]["record"]
             else:
                 raise ValueError('Invalid format file')
 
     @classmethod
-    def import_data(cls, file, type):
-        report_data = cls.read_file(file)
+    def import_data(cls, path, type):
+        report_data = cls.read_file(path)
 
         if type == "simples":
             return SimpleReport.generate(report_data)
